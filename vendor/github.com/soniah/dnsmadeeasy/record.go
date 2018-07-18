@@ -85,7 +85,7 @@ func (c *Client) CreateRecord(domainID string, cr map[string]interface{}) (strin
 
 	resp, err := checkResp(c.HTTP.Do(req))
 	if err != nil {
-		return "", fmt.Errorf("Error creating record: %s", err)
+		return "", fmt.Errorf("Error creating record: %s %+v %+v %+v", err, req, cr)
 	}
 
 	record := new(Record)

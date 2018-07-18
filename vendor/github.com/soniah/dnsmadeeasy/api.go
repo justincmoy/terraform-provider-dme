@@ -140,5 +140,7 @@ func checkResp(resp *http.Response, err error) (*http.Response, error) {
 	} else if resp.StatusCode == 404 {
 		return nil, fmt.Errorf("Not found")
 	}
-	return nil, fmt.Errorf("API Error: %s", resp.Status)
+	dnsError := Error{}
+	decodeBody(resp, &dnsError)
+	return nil, fmt.Errorf("API Error: %s %+v", resp.Status, dnsError)
 }
